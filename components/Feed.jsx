@@ -1,29 +1,66 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PromptCard from "./PromptCard.jsx";
 
 const PromptCardList = ({ data, handleTagClick }) => {
-  return <div className="mt-16">
-    {data.map((prompt) => (
-      <PromptCard key={prompt.id} post={prompt} handleTagClick={handleTagClick} />
-    ))}
-  </div>;
+  return (
+    <div className="mt-16 prompt_layout">
+      {data.map((prompt) => (
+        <PromptCard
+          key={prompt.id}
+          post={prompt}
+          handleTagClick={handleTagClick}
+        />
+      ))}
+    </div>
+  );
 };
 
 const Feed = () => {
-  const [searchValue, setSearchValue] = React.useState("");
-  const [prompts, setPrompts] = React.useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [searchTimeout, setSearchTimeout] = useState(null);
+  const [searchedResults, setSearchedResults] = useState([]);
+  const [allPosts, setAllPosts] = useState([]);
 
-  function handleSearchChange(e) {}
+    const filterPrompts = (searchtext) => {
+      const regex = new RegExp(searchtext, "i"); // 'i' flag for case-insensitive search
+      return allPosts.filter(
+        (item) =>
+          regex.test(item.creator.username) ||
+          regex.test(item.tag) ||
+          regex.test(item.prompt)
+      );
+    };
+
+    const handleSearchChange = (e) => {
+      clearTimeout(searchTimeout);
+      setSearchText(e.target.value);
+
+      // debounce method
+      setSearchTimeout(
+        setTimeout(() => {
+          const searchResult = filterPrompts(e.target.value);
+          setSearchedResults(searchResult);
+        }, 500)
+      );
+    };
+
+    const handleTagClick = (tagName) => {
+      setSearchText(tagName);
+
+      const searchResult = filterPrompts(tagName);
+      setSearchedResults(searchResult);
+    };
+
 
   useEffect(() => {
     const fetchPosts = async () => {
       const res = await fetch("/api/prompt");
       const data = await res.json();
-      console.log(data[0].creator.image);
+      console.log(data);
 
-      setPrompts(data);
+      setAllPosts(data);
     };
 
     fetchPosts();
@@ -31,17 +68,17 @@ const Feed = () => {
 
   return (
     <section className="feed">
-      <form action="" className="relative w-full flex-center">
+      <div className="relative w-full">
         <input
           type="text"
           placeholder="Search tags or a username"
-          value={searchValue}
+          value={searchText}
           onChange={handleSearchChange}
           required
-          className="search_input peer text-[#2073E7] font-semibold"
+          className="search_input peer text-[#2073E7] font-bold"
         />
-      </form>
-      <PromptCardList data={prompts} handleTagClick={() => {}} />
+      </div>
+      <PromptCardList data={searchedResults} handleTagClick={handleTagClick} />
     </section>
   );
 };
