@@ -26,11 +26,14 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   };
   // console.log(post);
   return (
-    <div className="w-80 relative block overflow-hidden rounded-lg border border-gray-100 p-4 sm:p-6 lg:p-8">
+    <div className="w-80 relative block bg-slate-100 overflow-hidden rounded-lg border border-gray-100 p-4 sm:p-6 lg:p-8">
       <span className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 to-blue-600" />
       <div className="sm:flex sm:justify-between sm:gap-4">
         <div>
-          <h3 className="text-lg font-bold text-gray-900 sm:text-xl">
+          <h3
+            onClick={handleProfileClick}
+            className="text-lg font-bold text-gray-900 sm:text-xl"
+          >
             {post.creator.username}
           </h3>
           <p className="mt-1 text-xs font-medium text-gray-600">
@@ -49,7 +52,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
           />
         </div>
         <div
-          className="copy_btn"
+          className="copy_btn shadow-xl shadow-black"
           onClick={() => {
             handleCopy;
           }}
