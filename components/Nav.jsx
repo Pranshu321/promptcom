@@ -24,11 +24,11 @@ const Nav = () => {
         <Image
           src="/assets/images/logo.svg"
           alt="logo"
-          width={30}
-          height={30}
+          width={150}
+          height={150}
           className="object-contain"
         />
-        <p className="logo_text">Promptcom</p>
+        {/* <p className="logo_text">Promptcom</p> */}
       </Link>
 
       {/* Desktop Navigation */}

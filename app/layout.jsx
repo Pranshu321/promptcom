@@ -7,7 +7,7 @@ export const metadata = {
   title: "Promptcom",
   description: "The community for prompts and ideas",
   icons: {
-    icon: "/assets/images/logo.svg",
+    icon: "/assets/images/icon.svg",
   },
 };
 
