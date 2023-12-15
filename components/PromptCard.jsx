@@ -64,19 +64,19 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
                 : "/assets/icons/copy.svg"
             }
             alt={copied === post.prompt ? "tick_icon" : "copy_icon"}
-            width={12}
-            height={12}
+            width={20}
+            height={20}
             onClick={handleCopy}
           />
         </div>
       </div>
       <div className="mt-4">
-        <p className="max-w-[40ch] text-sm text-gray-500">{post.prompt}</p>
+        <p className="max-w-[40ch] text-sm h-20 overflow-y-scroll remove-scroll text-gray-600">{post.prompt}</p>
       </div>
       <dl className="mt-6 flex gap-4 sm:gap-6">
         <div
           onClick={() => handleTagClick && handleTagClick(post.tag)}
-          className="flex flex-col-reverse"
+          className="flex pb-2 flex-col-reverse"
         >
           <dt className="text-sm font-medium text-gray-600">
             Tags: {post.tag}
@@ -84,7 +84,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
         </div>
       </dl>
       {session?.user.id === post.creator._id && pathName === "/profile" && (
-        <div className="mt-5 font-semibold flex-end gap-4 border-t border-gray-100 pt-3">
+        <div className="font-semibold flex-end gap-4 border-t border-gray-100 pt-3">
           <p
             className="font-inter text-sm green_gradient hover:underline cursor-pointer"
             onClick={handleEdit}

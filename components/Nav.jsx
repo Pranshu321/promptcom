@@ -35,6 +35,13 @@ const Nav = () => {
       <div className="sm:flex hidden">
         {session?.user ? (
           <div className="flex gap-3 md:gap-5">
+            <a
+              href="https://chat.openai.com/"
+              target="_blank"
+              className="green_btn"
+            >
+              Open ChatGPT
+            </a>
             <Link href="/create-prompt" className="black_btn">
               Create Post
             </Link>
