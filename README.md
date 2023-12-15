@@ -31,7 +31,7 @@
 
 <div align="center">
   <h3 align="center">Join PromptCom and enhance your AI interactions!</h3>
-  <a id="top" href="https://promptcom.community" target="_blank">
+  <a id="top" href="https://promptcom.vercel.app" target="_blank">
     <img src="https://promptcom.vercel.app/assets/images/logo.svg" width="150px" alt="join-button">
   </a>
 </div>
