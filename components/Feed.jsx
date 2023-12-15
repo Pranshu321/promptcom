@@ -73,7 +73,7 @@ const Feed = () => {
           value={searchText}
           onChange={handleSearchChange}
           required
-          className="search_input peer text-[#2073E7] font-bold"
+          className="search_input mb-10 peer text-[#2073E7] font-bold"
         />
       </div>
       <PromptCardList
