@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import PromptCard from "./PromptCard.jsx";
+import { revalidatePath } from "next/cache";
 
 const PromptCardList = ({ data, handleTagClick }) => {
   return (
@@ -55,12 +56,15 @@ const Feed = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = await fetch("/api/prompt");
+      const res = await fetch("/api/prompt", {
+        next: {
+          revalidate: 0,
+        },
+      });
       const data = await res.json();
       console.log(data);
       setAllPosts(data);
     };
-
     fetchPosts();
   }, []);
 
@@ -77,7 +81,7 @@ const Feed = () => {
         />
       </div>
       <PromptCardList
-        data={searchText!== "" ? searchedResults : allPosts}
+        data={searchText !== "" ? searchedResults : allPosts}
         handleTagClick={handleTagClick}
       />
     </section>
